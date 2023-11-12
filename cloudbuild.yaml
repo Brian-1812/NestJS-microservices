@@ -1,0 +1,65 @@
+steps:
+  # RESERVATIONS
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west10-docker.pkg.dev/blue-journey/reservations/production',
+        '-f',
+        'apps/reservations/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'europe-west10-docker.pkg.dev/blue-journey/reservations/production',
+      ]
+
+  # AUTH
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west10-docker.pkg.dev/blue-journey/auth/production',
+        '-f',
+        'apps/auth/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west10-docker.pkg.dev/blue-journey/auth/production']
+
+  #PAYMENTS
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west10-docker.pkg.dev/blue-journey/payments/production',
+        '-f',
+        'apps/payments/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['push', 'europe-west10-docker.pkg.dev/blue-journey/payments/production']
+
+  # NOTIFICATIONS
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west10-docker.pkg.dev/blue-journey/notifications/production',
+        '-f',
+        'apps/notifications/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'europe-west10-docker.pkg.dev/blue-journey/notifications/production',
+      ]
